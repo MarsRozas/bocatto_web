@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Finalizar Compra - Bocatto</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container my-5">
+        <div class="row">
+            <div class="col-md-6 mb-4">
+                <h4 class="mb-3">Tu Pedido</h4>
+                <ul class="list-group mb-3">
+                    {% for item in items %}
+                    <li class="list-group-item d-flex justify-content-between lh-sm">
+                        <div>
+                            <h6 class="my-0">{{ item.producto.nombre }}</h6>
+                            <small class="text-muted">Cantidad: {{ item.cantidad }}</small>
+                        </div>
+                        <span class="text-muted">${{ item.subtotal }}</span>
+                    </li>
+                    {% endfor %}
+                    <li class="list-group-item d-flex justify-content-between bg-light">
+                        <span class="fw-bold">Total a Pagar (CLP)</span>
+                        <strong class="fw-bold text-success">${{ total }}</strong>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="col-md-6">
+                <h4 class="mb-3">Datos de Envío</h4>
+                <form method="post">
+                    {% csrf_token %}
+                    
+                    <div class="mb-3">
+                        <label>Nombre del Cliente</label>
+                        {{ form.nombre_cliente }}
+                    </div>
+                    <div class="mb-3">
+                        <label>Teléfono</label>
+                        {{ form.telefono }}
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label>Tipo de Entrega</label>
+                        {{ form.tipo_entrega }}
+                    </div>
+
+                    <div class="mb-3" id="divDireccion" style="display: none;">
+                        <label>Dirección de Entrega</label>
+                        {{ form.direccion }}
+                    </div>
+
+                    <hr class="my-4">
+
+                    <button class="w-100 btn btn-primary btn-lg" type="submit">
+                        ✅ Pagar y Ordenar
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const selectEntrega = document.getElementById('tipoEntrega');
+        const divDireccion = document.getElementById('divDireccion');
+        const inputDireccion = document.getElementById('inputDireccion');
+
+        function toggleDireccion() {
+            if (selectEntrega.value === 'delivery') {
+                divDireccion.style.display = 'block';
+                inputDireccion.required = true; // Hace obligatorio escribir dirección
+            } else {
+                divDireccion.style.display = 'none';
+                inputDireccion.required = false;
+            }
+        }
+
+        selectEntrega.addEventListener('change', toggleDireccion);
+        // Ejecutar al inicio por si el navegador guardó el estado
+        toggleDireccion();
+    </script>
+</body>
+</html>
