@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from .models import Categoria, Producto, Pedido, ItemPedido
-from .forms import PedidoForm
+from .models import Categoria, Producto, Pedido, ItemPedido, MensajeContacto
+from .forms import PedidoForm, ContactoForm
 from django.contrib.auth.forms import UserCreationForm # <--- Para crear usuarios
 from django.contrib.auth.decorators import login_required # <--- El candado
 from django.contrib import messages
@@ -130,3 +130,18 @@ def mis_pedidos(request):
     # Si usas nombre_cliente, tendrías que filtrar por eso, pero lo ideal es por request.user
     pedidos = Pedido.objects.filter(usuario=request.user).order_by('-fecha')
     return render(request, 'menu/mis_pedidos.html', {'pedidos': pedidos})
+
+def contacto(request):
+    if request.method == 'POST':
+        form = ContactoForm(request.POST)
+        if form.is_valid():
+            form.save() # Guarda el mensaje en el Admin
+            messages.success(request, '¡Gracias! Hemos recibido tu mensaje.')
+            return redirect('contacto')
+    else:
+        form = ContactoForm()
+    
+    return render(request, 'menu/contacto.html', {'form': form})
+
+def ubicacion(request):
+    return render(request, 'menu/ubicacion.html')

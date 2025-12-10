@@ -1,0 +1,39 @@
+{% extends 'menu/base.html' %}
+
+{% block content %}
+<div class="container my-5">
+    <div class="text-center mb-5">
+        <h1 class="fw-bold">📍 Encuéntranos</h1>
+        <p class="lead">Ven a disfrutar del mejor sabor en nuestro local.</p>
+    </div>
+
+    <div class="row">
+        <div class="col-md-4 mb-4">
+            <div class="card h-100 shadow-sm border-0 bg-light">
+                <div class="card-body p-4">
+                    <h4 class="card-title text-warning fw-bold mb-4">Bocatto Central</h4>
+                    
+                    <p><strong>🏠 Dirección:</strong><br>
+                    José Tomás Rider 1245,<br>Providencia, Chile.</p>
+                    
+                    <p><strong>⏰ Horario:</strong><br>
+                    Lunes a Viernes: 12:00 - 23:00<br>
+                    Sábados y Domingos: 13:00 - 00:00</p>
+                    
+                    <p><strong>📞 Teléfono:</strong><br>
+                    +56 2 2333 4444</p>
+
+                    <a href="{% url 'contacto' %}" class="btn btn-outline-dark w-100 mt-3">Escríbenos</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-8">
+            <div class="ratio ratio-16x9 shadow rounded overflow-hidden">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3329.3409909735437!2d-70.61911534447091!3d-33.440421581186335!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9662cf81e1dca1f9%3A0x7ecdafa1c573319a!2sJos%C3%A9%20Tom%C3%A1s%20Rider%201245%2C%207501076%20Providencia%2C%20Regi%C3%B3n%20Metropolitana!5e0!3m2!1ses-419!2scl!4v1765341482029!5m2!1ses-419!2scl" 
+                    width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Categoria, Producto, Pedido, ItemPedido
+from .models import Categoria, Producto, Pedido, ItemPedido, MensajeContacto
 # Register your models here.
 
 admin.site.register(Categoria)
@@ -32,3 +32,10 @@ class PedidoAdmin(admin.ModelAdmin):
 
 # Registramos el Pedido con esta configuración especial
 admin.site.register(Pedido, PedidoAdmin)
+
+@admin.register(MensajeContacto)
+class MensajeContactoAdmin(admin.ModelAdmin):
+    list_display = ('nombre', 'motivo', 'fecha')
+    list_filter = ('motivo', 'fecha')
+    search_fields = ('nombre', 'correo')
+    readonly_fields = ('nombre', 'correo', 'telefono', 'motivo', 'mensaje', 'fecha') # Solo lectura para que no los editen

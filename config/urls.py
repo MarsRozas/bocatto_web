@@ -18,7 +18,7 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
-from menu.views import index, agregar_al_carrito, ver_carrito, limpiar_carrito, checkout, registro, mis_pedidos
+from menu.views import index, agregar_al_carrito, ver_carrito, limpiar_carrito, checkout, registro, mis_pedidos, contacto, ubicacion
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -30,6 +30,8 @@ urlpatterns = [
     path('limpiar/', limpiar_carrito, name='limpiar'),
     path('checkout/', checkout, name='checkout'),
     path('mis-pedidos/', mis_pedidos, name='mis_pedidos'),
+    path('contacto/', contacto, name='contacto'),
+    path('ubicacion/', ubicacion, name='ubicacion'),
 ]
 
 # Configuración para servir imágenes en modo desarrollo
